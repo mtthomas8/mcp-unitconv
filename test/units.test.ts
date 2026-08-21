@@ -48,13 +48,13 @@ test('result carries the dimension it was resolved through', () => {
 });
 
 test('dimension mismatch is rejected', () => {
-  assert.throws(() => convert(1, 'km', 'kg'), /量纲不匹配/);
-  assert.throws(() => convert(1, 's', 'm'), /量纲不匹配/);
+  assert.throws(() => convert(1, 'km', 'kg'), /dimension mismatch/);
+  assert.throws(() => convert(1, 's', 'm'), /dimension mismatch/);
 });
 
 test('unknown units are rejected', () => {
-  assert.throws(() => convert(1, 'parsec', 'm'), /未知单位: parsec/);
-  assert.throws(() => convert(1, 'm', 'parsec'), /未知单位: parsec/);
+  assert.throws(() => convert(1, 'parsec', 'm'), /unknown unit: parsec/);
+  assert.throws(() => convert(1, 'm', 'parsec'), /unknown unit: parsec/);
 });
 
 test('a temperature unit cannot mix with a non-temperature unit', () => {
@@ -62,8 +62,8 @@ test('a temperature unit cannot mix with a non-temperature unit', () => {
 });
 
 test('non-finite values are rejected', () => {
-  assert.throws(() => convert(NaN, 'm', 'km'), /有限数字/);
-  assert.throws(() => convert(Infinity, 'm', 'km'), /有限数字/);
+  assert.throws(() => convert(NaN, 'm', 'km'), /finite number/);
+  assert.throws(() => convert(Infinity, 'm', 'km'), /finite number/);
 });
 
 test('dimensionOf resolves known units and rejects unknown ones', () => {

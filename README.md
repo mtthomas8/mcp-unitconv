@@ -20,6 +20,14 @@ convert(1, 'km', 'm');  // => { value: 1000, from: 'km', to: 'm', dimension: 'le
 convert(1, 'km', 'kg'); // throws: dimension mismatch: km is length, kg is mass
 ```
 
+## CLI
+
+```bash
+npm run build
+node dist/cli.js 100 C F  # => 212
+node dist/cli.js --help   # usage and the full list of supported units
+```
+
 ## Test
 
 ```bash

@@ -27,6 +27,18 @@ test('time conversions', () => {
   assert.equal(convert(1000, 'ms', 's').value, 1);
 });
 
+test('volume conversions', () => {
+  assert.equal(convert(1, 'm3', 'l').value, 1000);
+  closeTo(convert(1, 'gal', 'qt').value, 4);
+  closeTo(convert(1000, 'ml', 'l').value, 1);
+});
+
+test('area conversions', () => {
+  assert.equal(convert(1, 'km2', 'm2').value, 1000000);
+  assert.equal(convert(1, 'ha', 'm2').value, 10000);
+  closeTo(convert(1, 'acre', 'ft2').value, 43560, 1e-6);
+});
+
 test('temperature conversions', () => {
   closeTo(convert(100, 'C', 'F').value, 212);
   closeTo(convert(32, 'F', 'C').value, 0);

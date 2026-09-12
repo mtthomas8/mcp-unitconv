@@ -1,7 +1,7 @@
 # unitconv
 
 A small TypeScript library for converting between units of length, mass, time,
-and temperature. No dependencies.
+volume, area, and temperature. No dependencies.
 
 ## Install
 

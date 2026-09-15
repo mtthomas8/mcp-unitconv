@@ -9,6 +9,7 @@ interface Output {
 function usage(): string {
   return [
     'usage: unitconv <value> <from> <to>',
+    '       unitconv --list-units | -u',
     '',
     'example: unitconv 100 C F',
     '',
@@ -20,6 +21,11 @@ function usage(): string {
 export function run(argv: string[], out: Output = console): number {
   if (argv.length === 0 || argv[0] === '--help' || argv[0] === '-h') {
     out.log(usage());
+    return 0;
+  }
+
+  if (argv[0] === '--list-units' || argv[0] === '-u') {
+    for (const unit of supportedUnits().sort()) out.log(unit);
     return 0;
   }
 

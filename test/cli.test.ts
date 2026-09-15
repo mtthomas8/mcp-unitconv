@@ -35,6 +35,23 @@ test('prints usage with --help', () => {
   assert.match(lines.log[0], /usage: unitconv/);
 });
 
+test('lists units one per line with --list-units', () => {
+  const { out, lines } = capture();
+  const code = run(['--list-units'], out);
+  assert.equal(code, 0);
+  assert.ok(lines.log.length > 1);
+  assert.ok(lines.log.includes('km'));
+  assert.ok(lines.log.includes('C'));
+  assert.deepEqual(lines.log, [...lines.log].sort());
+});
+
+test('-u is a shorthand for --list-units', () => {
+  const { out, lines } = capture();
+  const code = run(['-u'], out);
+  assert.equal(code, 0);
+  assert.ok(lines.log.includes('kg'));
+});
+
 test('rejects the wrong number of arguments', () => {
   const { out, lines } = capture();
   const code = run(['1', 'km'], out);

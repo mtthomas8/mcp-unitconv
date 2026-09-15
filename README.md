@@ -24,8 +24,9 @@ convert(1, 'km', 'kg'); // throws: dimension mismatch: km is length, kg is mass
 
 ```bash
 npm run build
-node dist/cli.js 100 C F  # => 212
-node dist/cli.js --help   # usage and the full list of supported units
+node dist/cli.js 100 C F        # => 212
+node dist/cli.js --help         # usage and the full list of supported units
+node dist/cli.js --list-units   # one unit per line, for scripting (-u also works)
 ```
 
 ## Test

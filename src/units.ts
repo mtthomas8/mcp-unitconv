@@ -53,5 +53,13 @@ function convertTemperature(value: number, from: string, to: string): number | n
 
 /** Lists every supported unit. */
 export function supportedUnits(): string[] {
-  return [...Object.values(FACTORS).flatMap((t) => Object.keys(t)), 'C', 'F', 'K'];
+  return Object.values(supportedUnitsByDimension()).flat();
+}
+
+/** Lists every supported unit, grouped by the dimension it belongs to. */
+export function supportedUnitsByDimension(): Record<string, string[]> {
+  const grouped: Record<string, string[]> = {};
+  for (const [dim, table] of Object.entries(FACTORS)) grouped[dim] = Object.keys(table);
+  grouped.temperature = ['C', 'F', 'K'];
+  return grouped;
 }

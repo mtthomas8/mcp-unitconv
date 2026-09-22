@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { convert, dimensionOf, supportedUnits } from '../src/units.ts';
+import { convert, dimensionOf, supportedUnits, supportedUnitsByDimension } from '../src/units.ts';
 
 function closeTo(actual: number, expected: number, epsilon = 1e-9) {
   assert.ok(
@@ -92,4 +92,25 @@ test('supportedUnits lists every convertible unit exactly once', () => {
   for (const u of ['m', 'km', 'g', 'kg', 's', 'h', 'C', 'F', 'K']) {
     assert.ok(units.includes(u), `missing ${u}`);
   }
+});
+
+test('supportedUnitsByDimension groups units under their dimension', () => {
+  const grouped = supportedUnitsByDimension();
+  assert.deepEqual(Object.keys(grouped).sort(), [
+    'area',
+    'length',
+    'mass',
+    'temperature',
+    'time',
+    'volume',
+  ]);
+  assert.ok(grouped.length.includes('km'));
+  assert.ok(grouped.mass.includes('kg'));
+  assert.deepEqual(grouped.temperature, ['C', 'F', 'K']);
+  for (const unit of grouped.length) assert.equal(dimensionOf(unit), 'length');
+});
+
+test('supportedUnitsByDimension and supportedUnits agree on the full set', () => {
+  const flatFromGroups = Object.values(supportedUnitsByDimension()).flat();
+  assert.deepEqual([...flatFromGroups].sort(), [...supportedUnits()].sort());
 });

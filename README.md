@@ -30,7 +30,7 @@ supportedUnitsByDimension(); // => { length: ['m', 'km', ...], mass: [...], ...,
 npm run build
 node dist/cli.js 100 C F        # => 212
 node dist/cli.js --help         # usage and the full list of supported units
-node dist/cli.js --list-units   # one unit per line, for scripting (-u also works)
+node dist/cli.js --list-units   # units grouped by dimension (-u also works)
 ```
 
 ## Test

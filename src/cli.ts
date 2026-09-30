@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { convert, supportedUnits } from './units.ts';
+import { convert, supportedUnits, supportedUnitsByDimension } from './units.ts';
 
 interface Output {
   log: (line: string) => void;
@@ -25,7 +25,12 @@ export function run(argv: string[], out: Output = console): number {
   }
 
   if (argv[0] === '--list-units' || argv[0] === '-u') {
-    for (const unit of supportedUnits().sort()) out.log(unit);
+    const groups = Object.entries(supportedUnitsByDimension());
+    groups.forEach(([dimension, units], i) => {
+      if (i > 0) out.log('');
+      out.log(`${dimension}:`);
+      for (const unit of [...units].sort()) out.log(`  ${unit}`);
+    });
     return 0;
   }
 
